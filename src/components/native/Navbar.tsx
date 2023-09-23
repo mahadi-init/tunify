@@ -14,6 +14,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import "../../css/navbar.css"
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,7 +34,7 @@ export default function AppNavbar() {
   ];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar isBordered onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -74,7 +75,7 @@ export default function AppNavbar() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu className='mt-2'>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
@@ -82,8 +83,8 @@ export default function AppNavbar() {
                 index === 2
                   ? 'primary'
                   : index === menuItems.length - 1
-                  ? 'danger'
-                  : 'foreground'
+                    ? 'danger'
+                    : 'foreground'
               }
               className='w-full'
               href='#'
