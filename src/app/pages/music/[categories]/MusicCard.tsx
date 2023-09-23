@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { storage } from '@/db/lib/client';
 import { BsPauseCircleFill, BsPlayCircleFill } from 'react-icons/bs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface MusicCardProps {
   id: string;
@@ -18,8 +18,13 @@ interface MusicCardProps {
 }
 
 export default function MusicCard(props: MusicCardProps) {
-  const [audio] = useState(new Audio());
+  //@ts-expect-error
+  const [audio, setAudio] = useState<Audio>();
   const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    setAudio(new Audio());
+  }, []);
 
   const handleMusic = async () => {
     // check if already intialized
