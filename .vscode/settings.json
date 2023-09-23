@@ -7,6 +7,6 @@
     ".eslintrc.json": true,
     ".prettierrc.json": true,
     "next-env.d.ts": true,
-    ".gitignore": true
+    ".gitignore": false
   }
 }
