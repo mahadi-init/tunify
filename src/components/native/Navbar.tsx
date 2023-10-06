@@ -2,7 +2,6 @@
 
 import {
   Navbar,
-  NavbarBrand,
   NavbarContent,
   NavbarItem,
   Button,
@@ -15,8 +14,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import "../../css/navbar.css"
-import { SearchIcon } from "./SearchIcon.jsx";
+import '../../css/navbar.css';
+import { SearchIcon } from '@/icons/SearchIcon';
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,7 +27,7 @@ export default function AppNavbar() {
     'Feed',
     'Trending',
     'Categories',
-    'Settings'
+    'Settings',
   ];
 
   return (
@@ -79,19 +78,22 @@ export default function AppNavbar() {
       <NavbarContent justify='end'>
         <Input
           classNames={{
-            base: "max-w-full sm:max-w-[10rem] h-10",
-            mainWrapper: "h-full",
-            input: "text-small",
-            inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+            base: 'max-w-full sm:max-w-[10rem] h-10',
+            mainWrapper: 'h-full',
+            input: 'text-small',
+            inputWrapper:
+              'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20',
           }}
-          placeholder="Type to search..."
-          size="sm"
-          startContent={<SearchIcon size={18} />}
-          type="search"
+          placeholder='Type to search...'
+          size='sm'
+          startContent={
+            <SearchIcon size={18} width={undefined} height={undefined} />
+          }
+          type='search'
         />
         <NavbarItem className='hidden md:block'>
           <Button variant='flat'>
-            <Link href='/pages/login'>Login</Link>
+            <Link href='/pages/auth'>Profile</Link>
           </Button>
         </NavbarItem>
       </NavbarContent>
@@ -103,8 +105,8 @@ export default function AppNavbar() {
                 index === 2
                   ? 'primary'
                   : index === menuItems.length - 1
-                    ? 'danger'
-                    : 'foreground'
+                  ? 'danger'
+                  : 'foreground'
               }
               className='w-full'
               href={'#' + item}
