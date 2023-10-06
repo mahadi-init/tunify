@@ -2,18 +2,20 @@
 
 import {
   Navbar,
-  NavbarBrand,
   NavbarContent,
   NavbarItem,
   Button,
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
+  Input,
 } from '@nextui-org/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import '../../css/navbar.css';
+import { SearchIcon } from '@/icons/SearchIcon';
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,19 +23,15 @@ export default function AppNavbar() {
 
   const menuItems = [
     'Profile',
-    'Dashboard',
-    'Activity',
-    'Analytics',
-    'System',
-    'Deployments',
-    'My Settings',
-    'Team Settings',
-    'Help & Feedback',
-    'Log Out',
+    'Library',
+    'Feed',
+    'Trending',
+    'Categories',
+    'Settings',
   ];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar isBordered onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -53,12 +51,17 @@ export default function AppNavbar() {
       <NavbarContent className='hidden gap-4 sm:flex' justify='center'>
         <NavbarItem>
           <Link color='foreground' href='#'>
-            Trending
+            Library
           </Link>
         </NavbarItem>
         <NavbarItem className='font-medium text-blue-500'>
           <Link href='#' aria-current='page'>
-            Featured
+            Feed
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color='foreground' href='#'>
+            Trending
           </Link>
         </NavbarItem>
         <NavbarItem>
@@ -66,15 +69,35 @@ export default function AppNavbar() {
             Categories
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link color='foreground' href='#'>
+            Settings
+          </Link>
+        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify='end'>
-        <NavbarItem>
+        <Input
+          classNames={{
+            base: 'max-w-full sm:max-w-[10rem] h-10',
+            mainWrapper: 'h-full',
+            input: 'text-small',
+            inputWrapper:
+              'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20',
+          }}
+          placeholder='Type to search...'
+          size='sm'
+          startContent={
+            <SearchIcon size={18} width={undefined} height={undefined} />
+          }
+          type='search'
+        />
+        <NavbarItem className='hidden md:block'>
           <Button variant='flat'>
-            <Link href='/pages/login'>Login</Link>
+            <Link href='/pages/auth'>Profile</Link>
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu className='mt-2'>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
@@ -86,7 +109,7 @@ export default function AppNavbar() {
                   : 'foreground'
               }
               className='w-full'
-              href='#'
+              href={'#' + item}
             >
               {item}
             </Link>
