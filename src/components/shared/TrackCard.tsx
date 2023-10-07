@@ -7,8 +7,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function TrackCard() {
+  const trackName = 'pop';
+
   return (
-    <Link href='/pages/music/hello'>
+    <Link href={`/pages/musics/${trackName}`}>
       <Card className='py-4'>
         <CardHeader className='flex-col items-start px-4 pb-0 pt-2'>
           <p className='text-tiny font-bold uppercase'>Daily Mix</p>

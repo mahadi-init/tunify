@@ -4,11 +4,11 @@ import {
   Navbar,
   NavbarContent,
   NavbarItem,
-  Button,
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
   Input,
+  Avatar,
 } from '@nextui-org/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -92,9 +92,13 @@ export default function AppNavbar() {
           type='search'
         />
         <NavbarItem className='hidden md:block'>
-          <Button variant='flat'>
-            <Link href='/pages/auth'>Profile</Link>
-          </Button>
+          <Link href='/pages/auth'>
+            <Avatar
+              isBordered
+              size='sm'
+              src='https://i.pravatar.cc/150?u=a042581f4e29026024d'
+            />
+          </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu className='mt-2'>
