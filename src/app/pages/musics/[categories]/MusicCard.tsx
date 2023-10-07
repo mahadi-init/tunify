@@ -20,13 +20,18 @@ export default function MusicCard(props: MusicCardProps) {
       href={`/pages/${DB_MUSIC_LOCATION}/${props.data.category}/${props.id}`}
       className='space-y-2 border-none p-2'
     >
-      <Image
+      {/* <Image
         alt='Woman listing to music'
         className='rounded-md object-cover'
         height={300}
         src='/images/hero-card.png'
         width={300}
-      />
+      /> */}
+      <img alt='Woman listing to music'
+        className='rounded-md object-cover'
+        height={300}
+        src='/images/hero-card.png'
+        width={300} />
       <div className='flex flex-col gap-1 pl-2'>
         <p className='font-bold'>{props.data.name}</p>
         <p className=''>
