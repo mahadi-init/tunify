@@ -1,5 +1,6 @@
 'use client';
 
+import { DB_MUSIC_LOCATION } from '@/const/locations';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,7 +10,6 @@ interface MusicCardProps {
     name: string;
     image: string;
     author: string;
-    song: string;
     category: string;
   };
 }
@@ -17,7 +17,7 @@ interface MusicCardProps {
 export default function MusicCard(props: MusicCardProps) {
   return (
     <Link
-      href={`/pages/music/${props.data.category}/${props.id}`}
+      href={`/pages/${DB_MUSIC_LOCATION}/${props.data.category}/${props.id}`}
       className='space-y-2 border-none p-2'
     >
       <Image

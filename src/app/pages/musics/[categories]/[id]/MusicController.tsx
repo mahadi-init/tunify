@@ -1,17 +1,26 @@
 'use client';
 
-import { Card, CardBody, Image, Button, Progress } from '@nextui-org/react';
+import {
+  Card,
+  CardBody,
+  Image,
+  Button,
+  Progress,
+  Spinner,
+} from '@nextui-org/react';
 import { HeartIcon } from '@/icons/HeartIcon';
 import { RepeatOneIcon } from '@/icons/RepeatOneIcon';
 import { PreviousIcon } from '@/icons/PreviousIcon';
 import { NextIcon } from '@/icons/NextIcon';
 import { ShuffleIcon } from '@/icons/SuffleIcon';
 import { useEffect, useState } from 'react';
-import { storage } from '@/db/lib/client';
-import { getDownloadURL, ref } from '@firebase/storage';
 import { BsPauseCircleFill, BsPlayCircleFill } from 'react-icons/bs';
 
-export default function MusicControl() {
+export default function MusicController({
+  downloadURL,
+}: {
+  downloadURL: string | undefined;
+}) {
   //@ts-expect-error
   const [audio, setAudio] = useState<Audio>();
   const [liked, setLiked] = useState(false);
@@ -22,13 +31,8 @@ export default function MusicControl() {
   }, []);
 
   const handleMusic = async () => {
-    // check if already intialized
     if (!audio.src) {
-      const musicRef = ref(
-        storage,
-        `musics/Owl City - Fireflies (Official Music Video).mp3`,
-      );
-      audio.src = await getDownloadURL(musicRef);
+      audio.src = downloadURL;
       audio.volume = 0.75;
     }
 
@@ -119,13 +123,18 @@ export default function MusicControl() {
                 isIconOnly
                 className='h-auto w-auto data-[hover]:bg-foreground/10'
                 radius='full'
+                disabled={downloadURL === undefined}
                 variant='light'
                 onClick={handleMusic}
               >
-                {isPlaying ? (
-                  <BsPauseCircleFill size={54} />
+                {downloadURL ? (
+                  isPlaying ? (
+                    <BsPauseCircleFill size={54} />
+                  ) : (
+                    <BsPlayCircleFill size={54} />
+                  )
                 ) : (
-                  <BsPlayCircleFill size={54} />
+                  <Spinner color='default' size='lg' />
                 )}
               </Button>
               <Button
