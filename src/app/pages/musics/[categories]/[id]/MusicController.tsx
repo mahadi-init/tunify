@@ -17,8 +17,10 @@ import { useEffect, useState } from 'react';
 import { BsPauseCircleFill, BsPlayCircleFill } from 'react-icons/bs';
 
 export default function MusicController({
+  musicCover,
   downloadURL,
 }: {
+  musicCover: string | undefined;
   downloadURL: string | undefined;
 }) {
   //@ts-expect-error
@@ -59,7 +61,7 @@ export default function MusicController({
               className='object-cover'
               height={200}
               shadow='md'
-              src='/images/album-cover.png'
+              src={musicCover ?? '/gif/giphy.gif'}
               width='100%'
             />
           </div>
