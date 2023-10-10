@@ -45,7 +45,7 @@ export default function Auth() {
       {page === 'SIGNUP' && <Signup />}
       {page && (
         <a
-          className='-mt-10 cursor-pointer text-right text-xs font-medium text-red-200'
+          className='cursor-pointer text-right text-xs font-medium text-red-200'
           onClick={() => setPage(undefined)}
         >
           Go back
