@@ -50,23 +50,24 @@ export default function MusicController({
   return (
     <Card
       isBlurred
-      className='max-w-[610px] border-none bg-background/60 dark:bg-default-100/50'
+      className='max-w-[500px] w-full border-none bg-background/60 dark:bg-default-100/50'
       shadow='sm'
     >
+      <div className='relative col-span-6 md:col-span-4 p-5'>
+        <Image
+          alt='Album cover'
+          className='object-cover'
+          height={200}
+          shadow='md'
+          src={musicCover ?? '/gif/giphy.gif'}
+          width='100%'
+        />
+      </div>
       <CardBody>
         <div className='grid grid-cols-6 items-center justify-center gap-6 md:grid-cols-12 md:gap-4'>
-          <div className='relative col-span-6 md:col-span-4'>
-            <Image
-              alt='Album cover'
-              className='object-cover'
-              height={200}
-              shadow='md'
-              src={musicCover ?? '/gif/giphy.gif'}
-              width='100%'
-            />
-          </div>
 
-          <div className='col-span-6 flex flex-col md:col-span-8'>
+
+          <div className='col-span-6 flex flex-col md:col-span-12'>
             <div className='flex items-start justify-between'>
               <div className='flex flex-col gap-0'>
                 <h3 className='font-semibold text-foreground/90'>Daily Mix</h3>
