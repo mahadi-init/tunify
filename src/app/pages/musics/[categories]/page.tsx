@@ -2,8 +2,8 @@ import MusicDb from '@/db/utils/db-music';
 import MusicCard from './MusicCard';
 
 export default async function Music() {
-  const musicdb = new MusicDb();
-  const musics = await musicdb.fetchAllMusics();
+  const musicDb = new MusicDb();
+  const musics = await musicDb.fetchAllMusics();
   console.log(musics);
 
   return (
