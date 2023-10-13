@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { HiOutlineMail } from 'react-icons/hi';
+import { Dispatch, SetStateAction } from 'react';
 
 const Inputs = z.object({
   firstName: z.string().min(2, { message: 'firstName too short' }),
@@ -19,7 +20,11 @@ const Inputs = z.object({
 
 type ValidationSchema = z.infer<typeof Inputs>;
 
-export default function Signup() {
+export default function Signup({
+  setPage,
+}: {
+  setPage: Dispatch<SetStateAction<'SIGNIN' | 'SIGNUP' | undefined>>;
+}) {
   const {
     register,
     handleSubmit,
@@ -41,51 +46,61 @@ export default function Signup() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit((data) => loginOrCreate(data))}
-      className='m-auto flex w-full flex-col gap-8'
-    >
-      <p className='pb-4 text-center text-3xl font-bold'>Signin to continue</p>
-      <div className='flex gap-2'>
-        {/* TODO: Implement FirstName LastName */}
-        <Input
-          size='sm'
-          type='text'
-          label='FirstName'
-          {...register('firstName', { required: true })}
-          errorMessage={errors.firstName && <span>first name too short</span>}
-        />
-        <Input
-          size='sm'
-          type='text'
-          label='LastName'
-          {...register('lastName', { required: true })}
-        />
-      </div>
-      <Input
-        size='sm'
-        type='email'
-        label='Email'
-        {...register('email', { required: true })}
-        errorMessage={errors.email && <span>enter valid Email</span>}
-      />
-      <Input
-        size='sm'
-        type='password'
-        label='Password'
-        {...register('password', { required: true })}
-        errorMessage={
-          errors.password && <span>minimum 6 characters required</span>
-        }
-      />
-      <Button
-        className='font-medium'
-        type='submit'
-        variant='bordered'
-        startContent={<HiOutlineMail size={24} />}
+    <>
+      <form
+        onSubmit={handleSubmit((data) => loginOrCreate(data))}
+        className='m-auto flex w-full flex-col gap-8'
       >
-        Signup With Email
-      </Button>
-    </form>
+        <p className='pb-4 text-center text-3xl font-bold'>
+          Signin to continue
+        </p>
+        <div className='flex gap-2'>
+          {/* TODO: Implement FirstName LastName */}
+          <Input
+            size='sm'
+            type='text'
+            label='FirstName'
+            {...register('firstName', { required: true })}
+            errorMessage={errors.firstName && <span>first name too short</span>}
+          />
+          <Input
+            size='sm'
+            type='text'
+            label='LastName'
+            {...register('lastName', { required: true })}
+          />
+        </div>
+        <Input
+          size='sm'
+          type='email'
+          label='Email'
+          {...register('email', { required: true })}
+          errorMessage={errors.email && <span>enter valid Email</span>}
+        />
+        <Input
+          size='sm'
+          type='password'
+          label='Password'
+          {...register('password', { required: true })}
+          errorMessage={
+            errors.password && <span>minimum 6 characters required</span>
+          }
+        />
+        <Button
+          className='font-medium'
+          type='submit'
+          variant='bordered'
+          startContent={<HiOutlineMail size={24} />}
+        >
+          Signup With Email
+        </Button>
+      </form>
+      <a
+        className='cursor-pointer pt-2 text-right text-xs font-medium text-red-200'
+        onClick={() => setPage(undefined)}
+      >
+        Go back
+      </a>
+    </>
   );
 }
