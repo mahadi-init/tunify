@@ -1,30 +1,39 @@
 import { useContext, useEffect, useState } from 'react';
+import fetchMusicUrl from '@/db/utils/fetch-music-url';
 import { MusicContext } from '@/contexts/music-context';
 
-export default function useMusicPlayer(downloadUrl : string | null | undefined) {
-  //@ts-expect-error
-  const [audio, setAudio] = useState<Audio>();
-  const { currentMusic, setCurrentMusic,isPlaying, setIsPlaying } = useContext(MusicContext);
+export default function useMusicPlayer() {
+  const [audio] = useState(new Audio());
+  const { musicInfo, isMusicPlaying, setIsMusicPlaying } =
+    useContext(MusicContext);
 
   useEffect(() => {
-    setAudio(new Audio());
-  }, []);
+    setIsMusicPlaying(false);
+    const getMusic = async () => {
+      return await fetchMusicUrl(
+        musicInfo?.data.category,
+        musicInfo?.data.name,
+      );
+    };
+
+    getMusic().then((url) => {
+      audio.src = url;
+    });
+  }, [
+    audio,
+    musicInfo?.data.category,
+    musicInfo?.data.name,
+    setIsMusicPlaying,
+  ]);
 
   const handleMusic = async () => {
-    if (!currentMusic) {
-      audio.src = downloadUrl;
-      audio.volume = 0.75;
-      setCurrentMusic(downloadUrl)
-    }
-
-    if (isPlaying) {
+    if (isMusicPlaying) {
       audio.pause();
-      setIsPlaying(false);
+      setIsMusicPlaying(false);
     } else {
       audio.play();
-      setIsPlaying(true);
+      setIsMusicPlaying(true);
     }
   };
-
-  return { audio, handleMusic,isPlaying };
+  return { handleMusic, musicInfo, isMusicPlaying };
 }

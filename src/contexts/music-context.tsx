@@ -1,15 +1,16 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
+import { MusicInfo } from '@/types/music-info';
 
 interface iContext {
-  currentMusic: string | null | undefined,
-  setCurrentMusic: Dispatch<SetStateAction<string | null | undefined>>,
-  isPlaying : boolean,
-  setIsPlaying : Dispatch<SetStateAction<boolean>>
+  musicInfo: MusicInfo | undefined;
+  setMusicInfo: Dispatch<SetStateAction<MusicInfo | undefined>>;
+  isMusicPlaying: boolean;
+  setIsMusicPlaying: Dispatch<SetStateAction<boolean>>;
 }
 
 export const MusicContext = createContext<iContext>({
-  currentMusic : null,
-  setCurrentMusic : ()=>{},
-  isPlaying: false,
-  setIsPlaying : ()=>{}
+  musicInfo: undefined,
+  setMusicInfo: () => {},
+  isMusicPlaying: false,
+  setIsMusicPlaying: () => {},
 });
