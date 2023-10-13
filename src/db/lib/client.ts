@@ -5,12 +5,13 @@ import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY as string,
-  authDomain: 'tunify-16646.firebaseapp.com',
-  projectId: 'tunify-16646',
-  storageBucket: 'tunify-16646.appspot.com',
-  messagingSenderId: '203234626463',
-  appId: '1:203234626463:web:132c15fd4edb1bc3420baa',
+  authDomain: "tunify-ff2b1.firebaseapp.com",
+  projectId: "tunify-ff2b1",
+  storageBucket: "tunify-ff2b1.appspot.com",
+  messagingSenderId: "817270851411",
+  appId: "1:817270851411:web:c6116340db1a43d57dc3a6"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

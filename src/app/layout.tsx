@@ -1,7 +1,7 @@
 import './globals.css';
 import { Providers } from '@/components/global/providers';
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
+import  {ReactNode, Suspense} from 'react';
 import Loading from './loading';
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html lang='en'>
