@@ -51,7 +51,7 @@ export default function MusicCard(props: MusicInfo) {
       <div>
         <Image
           alt='Woman listing to music'
-          className='rounded-md object-cover'
+          className='h-96 rounded-md object-cover'
           height={300}
           src={props.cover}
           width={300}
