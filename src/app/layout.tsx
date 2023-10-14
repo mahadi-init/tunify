@@ -1,6 +1,8 @@
 import './globals.css';
 import { Providers } from '@/components/global/providers';
 import type { Metadata } from 'next';
+import  {ReactNode, Suspense} from 'react';
+import Loading from './loading';
 
 export const metadata: Metadata = {
   title: 'Tunify',
@@ -10,13 +12,15 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html lang='en'>
-      <body>
-        <Providers>{children}</Providers>
-      </body>
+      <Suspense fallback={<Loading />}>
+        <body>
+          <Providers>{children}</Providers>
+        </body>
+      </Suspense>
     </html>
   );
 }

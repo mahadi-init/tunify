@@ -41,16 +41,8 @@ export default function Auth() {
           </Button>
         </div>
       )}
-      {page === 'SIGNIN' && <Signin />}
-      {page === 'SIGNUP' && <Signup />}
-      {page && (
-        <a
-          className='mt-2 cursor-pointer text-right text-xs font-medium text-red-200'
-          onClick={() => setPage(undefined)}
-        >
-          Go back
-        </a>
-      )}
+      {page === 'SIGNIN' && <Signin setPage={setPage} />}
+      {page === 'SIGNUP' && <Signup setPage={setPage} />}
     </div>
   );
 }
