@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import fetchMusicUrl from '@/db/utils/fetch-music-url';
+import musicUrl from '@/db/utils/music-url';
 import { MusicContext } from '@/contexts/music-context';
 
 export default function useMusicPlayer() {
@@ -10,10 +10,7 @@ export default function useMusicPlayer() {
   useEffect(() => {
     setIsMusicPlaying(false);
     const getMusic = async () => {
-      return await fetchMusicUrl(
-        musicInfo?.data.category,
-        musicInfo?.data.name,
-      );
+      return await musicUrl(musicInfo?.data.category, musicInfo?.data.name);
     };
 
     getMusic().then((url) => {
