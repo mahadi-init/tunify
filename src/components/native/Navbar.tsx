@@ -21,13 +21,27 @@ export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const menuItems = [
-    'Profile',
-    'Library',
-    'Feed',
-    'Trending',
-    'Categories',
-    'Settings',
+  const items = [
+    {
+      text: 'Favorites',
+      url: '/pages/profile/favorites',
+    },
+    {
+      text: 'Bengali',
+      url: '/pages/musics/bengali',
+    },
+    {
+      text: 'Pop',
+      url: '/pages/musics/pop',
+    },
+    {
+      text: 'Remix',
+      url: '/pages/musics/remix',
+    },
+    {
+      text: "Editor's Choice",
+      url: '/pages/musics/editors_choice',
+    },
   ];
 
   return (
@@ -49,31 +63,18 @@ export default function AppNavbar() {
       </NavbarContent>
 
       <NavbarContent className='hidden gap-4 sm:flex' justify='center'>
-        <NavbarItem>
-          <Link color='foreground' href='#'>
-            Library
-          </Link>
-        </NavbarItem>
-        <NavbarItem className='font-medium text-blue-500'>
-          <Link href='#' aria-current='page'>
-            Feed
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color='foreground' href='#'>
-            Trending
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color='foreground' href='#'>
-            Categories
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color='foreground' href='#'>
-            Settings
-          </Link>
-        </NavbarItem>
+        {items.map((item, index) => {
+          return (
+            <NavbarItem
+              key={index}
+              className={
+                pathname === item.url ? 'font-medium text-blue-500' : ''
+              }
+            >
+              <Link href={item.url}>{item.text}</Link>
+            </NavbarItem>
+          );
+        })}
       </NavbarContent>
       <NavbarContent justify='end'>
         <Input
@@ -92,7 +93,7 @@ export default function AppNavbar() {
           type='search'
         />
         <NavbarItem className='hidden md:block'>
-          <Link href='/pages/auth'>
+          <Link href='/pages/profile'>
             <Avatar
               isBordered
               size='sm'
@@ -102,23 +103,25 @@ export default function AppNavbar() {
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu className='mt-2'>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? 'primary'
-                  : index === menuItems.length - 1
-                  ? 'danger'
-                  : 'foreground'
-              }
-              className='w-full'
-              href={'#' + item}
-            >
-              {item}
+        {items.map((item, index) => (
+          <NavbarMenuItem
+            key={`${item}-${index}`}
+            className={pathname === item.url ? 'font-medium text-blue-500' : ''}
+          >
+            <Link className='w-full' href={item.url}>
+              {item.text}
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarMenuItem
+          className={
+            pathname === '/pages/profile' ? 'font-medium text-blue-500' : ''
+          }
+        >
+          <Link className='w-full' href={'/pages/profile'}>
+            Profile
+          </Link>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );
